@@ -1,8 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.7
 version = '1.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenLocal()
@@ -10,11 +11,27 @@ repositories {
     maven { url "http://repo.spring.io/libs-release" }
 }
 
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+
 dependencies {
+    provided 'com.pi4j:pi4j-core:0.0.5'
     compile 'com.google.code.gson:gson:1.7.2',
             'com.pi4j:pi4j-core:0.0.5'
 
-    testCompile("junit:junit")
+    testCompile "junit:junit"
+}
+
+jar {
+    dependsOn configurations.runtime
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest {
+        attributes 'Implementation-Title': 'PiTurnOnLED',
+                'Implementation-Version': version,
+                'Main-Class': 'Main'
+    }
 }
 
 task wrapper(type: Wrapper) {
