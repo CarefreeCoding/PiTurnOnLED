@@ -1,12 +1,14 @@
 import com.pi4j.io.gpio.*;
 
 /*
+ * Upload:
+ * scp TurnOnLED.java pi@192.168.7.21:/home/pi/dev/p1_led_blink
  * Compile:
- * javac -classpath .:classes:/opt/pi4j/lib/'*' Main.java
+ * javac -classpath .:classes:/opt/pi4j/lib/'*' TurnOnLED.java
  * Run:
- * sudo java -classpath .:classes:/opt/pi4j/lib/'*' Main
+ * sudo java -classpath .:classes:/opt/pi4j/lib/'*' TurnOnLED
  */
-public class Main
+public class TurnOnLED
 {
 	public static void main(String[] args)
 	{
